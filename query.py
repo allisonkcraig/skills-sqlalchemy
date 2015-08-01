@@ -49,14 +49,29 @@ q2 = Model.query.filter(Model.brand_name != "Chevrolet").all()
 def get_model_info(year):
     '''Takes in a year, and prints out each model, brand_name, and brand
     headquarters for that year using only ONE database query.'''
+    models = Model.query.filter_by(year=year).all()
 
-    pass
+   	for model in models:
+   		print "Model: %s, Brand Name: %s, Headquarters: %s" % (model.name, model.brand_name, model.Brand.headquarters)
+   
 
 def get_brands_summary():
     '''Prints out each brand name, and each model name for that brand
-     using only ONE database query.'''
+    using only ONE database query.'''
+    # computer was having troubles and coun't check  against db
+    brands = Brand.query.all()
 
-    pass
+    
+    for brand in brands:
+    	statement = ""
+    	statement + "\n Brand:" + brand + "Models: "
+    	for model in brand.models:
+    		statement + model.name ", "
+    	print statement
+
+    
+
+    
 
 # -------------------------------------------------------------------
 
@@ -79,5 +94,5 @@ def get_models_between(start_year, end_year):
 
 # 2. In your own words, what is an association table, and what *type* of relationship
 # does an association table manage?
-# An associate table manages 
+# An associate table manages how the tables connect and allows you to easily get information of multiple tables.
 
